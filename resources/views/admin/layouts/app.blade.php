@@ -1,115 +1,152 @@
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>{{ config('app.name') }}</title>
+    <meta charset="utf-8" />
+    <title>CMS | {{ config('app.name') }}</title>
 
-  <!-- General CSS Files -->
-  <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-
-  <!-- CSS Libraries -->
-  @stack('custom-css')
-
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-<!-- Start GA -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-94034622-3');
-</script>
-<!-- /END GA --></head>
-
-<body>
-  <div id="app">
-    <div class="main-wrapper main-wrapper-1">
-      <div class="navbar-bg"></div>
-      <nav class="navbar navbar-expand-lg main-navbar">
-        <form class="form-inline mr-auto">
-          <ul class="navbar-nav mr-3">
-            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-          </ul>
-        </form>
-        <ul class="navbar-nav navbar-right">
-          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div></a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-divider"></div>
-              <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </a>
-            </div>
-          </li>
-        </ul>
-      </nav>
-      <div class="main-sidebar sidebar-style-2">
-        <aside id="sidebar-wrapper">
-          <div class="sidebar-brand">
-            <a href="#"><img src="{{ asset('assets/vascomm-logo.png') }}" alt="vascomm logo" width="150" height="30"></a>
-          </div>
-          <div class="sidebar-brand sidebar-brand-sm">
-            <a href="#">St</a>
-          </div>
-          <ul class="sidebar-menu">
-            <li class="menu-header">Menu</li>
-            <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('home') }}"><i class="fa fa-home"></i> 
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="{{ Request::is('users*') ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('users.index') }}"><i class="fa fa-user"></i> 
-                  <span>Manajemen User</span>
-              </a>
-            </li>
-            <li class="{{ Request::is('product*') ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('product.index') }}"><i class="fa fa-book"></i> 
-                  <span>Manajemen Produk</span>
-              </a>
-            </li>
-          </ul>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo-simental.png') }}">
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    @stack('plugin-css')
+    @stack('custom-css')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Layout config Js -->
+    <script src="{{ asset('assets/js/layout.js') }}"></script>
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
    
-        </aside>
-      </div>
 
-      <!-- Main Content -->
-      @yield('content')
-      <footer class="main-footer">
-        <div class="footer-left">
-          Copyright &copy; 2024 <div class="bullet"></div> Design By <a href="#">Sonata Bagus Adji</a>
+</head>
+@php
+    $result = config('app.env');
+@endphp
+@if ($result == 'production')
+    <body oncontextmenu="return false">
+@else
+    <body>
+@endif
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        @include('admin.layouts.navbar')
+        <!-- ========== App Menu ========== -->
+        @include('admin.layouts.sidebar')
+        <!-- Left Sidebar End -->
+        <!-- Vertical Overlay-->
+        <div class="vertical-overlay"></div>
+
+        <div class="main-content">
+
+            <div class="page-content">
+                @yield('content')
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                @include('admin.layouts.footer')
+            </footer>
         </div>
-        <div class="footer-right">
-          
-        </div>
-      </footer>
+        <!-- end main content-->
+
     </div>
-  </div>
+    <!-- END layout-wrapper -->
 
-  <!-- General JS Scripts -->
-  <script src="{{ asset('assets/modules/jquery.min.js') }}"></script>
-  <script src="{{ asset('assets/modules/popper.js') }}"></script>
-  <script src="{{ asset('assets/modules/tooltip.js') }}"></script>
-  <script src="{{ asset('assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
-  <script src="{{ asset('assets/modules/moment.min.js') }}"></script>
-  <script src="{{ asset('assets/js/stisla.js') }}"></script>
-  
-  <!-- JS Libraies -->
 
-  <!-- Page Specific JS File -->
-  @stack('custom-js')
 
-  <!-- Template JS File -->
-  <script src="{{ asset('assets/js/scripts.js') }}"></script>
-  <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <!--start back-to-top-->
+    <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!--end back-to-top-->
+
+    <!--preloader-->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner-border text-primary avatar-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="customizer-setting d-none d-md-block">
+        <div class="btn-info btn-rounded shadow-lg btn btn-icon btn-lg p-2" data-bs-toggle="offcanvas" data-bs-target="#theme-settings-offcanvas" aria-controls="theme-settings-offcanvas">
+            <i class='mdi mdi-spin mdi-cog-outline fs-22'></i>
+        </div>
+    </div>
+
+    <!-- Theme Settings -->
+    @include('admin.layouts.theme')
+
+    <!-- JAVASCRIPT -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    @stack('plugin-js')
+    @stack('custom-js')
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+    <!-- App js -->
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    {{-- inspect element false --}}
+    @if ($result == 'production')
+        <script>
+            document.onkeydown = function(e) {
+                if(event.keyCode == 123) {
+                return false;
+                }
+                if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+                }
+                if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                return false;
+                }
+                if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+                }
+                if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+                }
+            }
+        </script>
+    @endif
+   
+    @if (Session::has('error'))
+    <script>
+        Swal.fire({
+            html:'<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Gagal !</h4><p class="text-muted mx-4 mb-0">{{ Session::get("error") }}</p></div></div>',
+            showCancelButton:!0,showConfirmButton:!1,
+            cancelButtonClass:"btn btn-primary w-xs mb-1",
+            cancelButtonText:"Tutup",
+            buttonsStyling:!1,showCloseButton:!0
+        })
+    </script>
+    @endif
+    @if(Session::has('success'))
+    <script>
+        Swal.fire({
+            html:'<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Sukses !</h4><p class="text-muted mx-4 mb-0">{{ Session::get("success") }}!</p></div></div>',
+            timer: 5000,
+            showCancelButton:!0,
+            showConfirmButton:!1,
+            cancelButtonClass:"btn btn-primary w-xs mb-1",
+            cancelButtonText:"Tutup",
+            buttonsStyling:!1,
+        })
+    </script>
+    @endif
 </body>
+
 </html>

@@ -23,24 +23,12 @@ class UserController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actions = [];
-                    if (!$row->email_verified_at) {
-                        $actions['approve'] = route('users.active', $row->id);
-                    }
-                    $actions['destroy'] = [
-                        'id' => $row->id,
-                        'name' => $row->name
-                    ];
+                    $actions['edit'] = route('users.edit', $row->id);
+                    $actions['destroy'] = $row->id;
                     
                     return view('admin.layouts.button', $actions);
-                }) 
-                ->addColumn('status', function ($row) {
-                    if ($row->email_verified_at) {
-                        return '<span class="badge badge-success">Aktif</span>';
-                    }else{
-                        return '<span class="badge badge-danger">Tidak Aktif</span>';
-                    }
-                }) 
-                ->rawColumns(['action', 'status'])
+                })
+                ->rawColumns(['action'])
                 ->make(true);
         }
         return view('admin.user.index');
@@ -53,7 +41,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.create');
     }
 
     /**
@@ -107,7 +95,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $detail = User::find($id);
+
+        return view('admin.user.edit', compact('detail'));
     }
 
     /**

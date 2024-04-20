@@ -1,133 +1,96 @@
 @extends('admin.layouts.app')
 
-@push('custom-css')
-    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/datatables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+@push('plugin-css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
 @endpush
 
 @section('content')
-<div class="main-content">
-    <section class="section">
-        <div class="section-header">
-        <h1>Manajemen User</h1>
-        </div>
+    <div class="container-fluid">
 
-        <div class="section-body">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h4 class="card-title text-right">Daftar Users</h4>
-                    <button  class="btn btn-primary create" data-toggle="modal" data-target="#exampleModal">Tambah Data</button>
-                </div>  
-                @if (Session::has('success'))
-                    <div class="alert alert-success alert-dismissible show fade">
-                        <div class="alert-body">
-                          <button class="close" data-dismiss="alert">
-                            <span>&times;</span>
-                          </button>
-                          {{ Session::get("success") }}.
-                        </div>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Users</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item active">Users</li>
+                        </ol>
                     </div>
-                @endif
-                <div class="card-body">
-                    <table class="table table-bordered datatable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Lengkap</th>
-                                <th>Email</th>
-                                <th>No.Telepon</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-            <h5 class="modal-title w-100" id="exampleModalLabel">Tambah User</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+                </div>
+            </div>
         </div>
-        <form action="{{ route('users.store') }}" method="POST" autocomplete="off"> @csrf
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Nama</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Masukkan nama">
-                    @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>Nomor Telepon</label>
-                    <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" placeholder="Masukkan nomor telepon">
-                    @error('phone')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Masukkan email">
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+        <!-- end page title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="card-title text-right">Daftar Users</h4>
+                        <a href="{{ route('users.create') }}"  class="btn btn-secondary bg-gradient waves-effect waves-light">Tambah Data</a>
+                    </div>
+                    <div class="card-body">
+                    <div class="table-responsive">
+                            <table class="table table-hover table-striped datatable">
+                                <thead>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>No.Telepon</th>
+                                    <th>Aksi</th>
+                                </thead>
+                            </table>
+                    </div>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-block">SIMPAN</button>
-            </div>
-        </form>
-      </div>
+        </div>
+
     </div>
-  </div>
+<!-- container-fluid -->
 @endsection
 
+@push('plugin-js')
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+@endpush
+
 @push('custom-js')
-    <script src="{{ asset('assets/modules/datatables/datatables.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/sweetalert/sweetalert.min.js') }}"></script>
     <script>
-        $(".datatable").dataTable({
-            processing: true,
+        var table = $('.datatable').DataTable({
             serverSide: true,
-            ajax: {
-                url: "{{ route('users.index') }}",
+            ordering: true,
+            info: true,
+            filter: true,
+            ajax:  {
+                url : "{{ route('users.index') }}",
             },
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
                 {data: 'phone', name: 'phone'},
-                {data: 'status', name: 'status'},
                 {data: 'action', name: 'action'},
             ],
         });
 
-        function Delete(id, name) {
-            swal({
-                title: 'Konfirmasi Hapus',
-                text: 'Apakah kamu yakin menghapus "'+ name +'" !',
-                icon: 'warning',
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                if (willDelete == true) {
+        function Delete(id) {
+            Swal.fire({
+                html:'<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon><div class="mt-4 pt-2 fs-15 mx-5"><h4>Apakah anda yakin ?</h4><p class="text-muted mx-4 mb-0">Menghapus data ini ?</p></div></div>',
+                showCancelButton: !0,
+                confirmButtonClass:"btn btn-primary bg-gradient wafes-effect waves-light w-xs me-2 mb-1",
+                confirmButtonText:"Ya, Hapus Data!",
+                cancelButtonText:"Batalkan!",
+                cancelButtonClass:"btn btn-danger bg-gradient wafes-effect waves-light w-xs mb-1",
+                buttonsStyling:!1,
+                showCloseButton:!0
+            }).then(function(isConfirm) {
+                console.log(isConfirm)
+                if (isConfirm.isConfirmed == true) {
                     //ajax delete
                     jQuery.ajaxSetup({
                         headers: {
@@ -141,17 +104,25 @@
                         },
                         type: 'DELETE',
                         success: function (response) {
+                            console.log(response);
                             if (response.status === "success") {
-                                swal({
-                                    text: 'Berhasil menghapus data "'+ name +'" !',
-                                    icon: 'success',
+                                Swal.fire({
+                                    html:'<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Sukses !</h4><p class="text-muted mx-4 mb-0">Berhasil hapus data ini!</p></div></div>',
+                                    timer: 5000,
+                                    showCancelButton:!0,showConfirmButton:!1,
+                                    cancelButtonClass:"btn btn-primary w-xs mb-1",
+                                    cancelButtonText:"Tutup",
+                                    buttonsStyling:!1,showCloseButton:!0
                                 }).then(function() {
-                                    window.location = "{{ url("users") }}";
+                                    location.reload();
                                 });
                             } else {
-                                swal({
-                                    text: 'Gagal menghapus data "'+ name +'" !',
-                                    icon: 'error',
+                                Swal.fire({
+                                    html:'<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Gagal !</h4><p class="text-muted mx-4 mb-0">Data tidak berhasil dihapus</p></div></div>',
+                                    showCancelButton:!0,showConfirmButton:!1,
+                                    cancelButtonClass:"btn btn-primary w-xs mb-1",
+                                    cancelButtonText:"Tutup",
+                                    buttonsStyling:!1,showCloseButton:!0
                                 }).then(function() {
                                     location.reload();
                                 });
@@ -161,7 +132,7 @@
                 } else if(isConfirm.isConfirmed == false) {
                     console.log('cancel')
                 }
-            });
+            })
         }
     </script>
 @endpush

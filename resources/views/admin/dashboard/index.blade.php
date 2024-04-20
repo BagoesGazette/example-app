@@ -1,84 +1,68 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<div class="main-content">
-    <section class="section">
-        <div class="section-header">
-        <h1>Dashboard</h1>
+<div class="container-fluid">
+    
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0">Dashboard</h4>
+  
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+  
+            </div>
         </div>
+    </div>
+    <!-- end page title -->
+  
+    <div class="row">
+        <div class="col-lg-12">
+  
+            <div class="h-100">
+                <div class="row mb-3 pb-1">
+                    <div class="col-12">
+                        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+                            <div class="flex-grow-1">
+                                <h4 class="fs-16 mb-1">Selamat {{ Carbon\Carbon::now()->timezone('Asia/Jakarta')->locale('id_ID')->isoFormat('A') }}, {{ Auth::user()->name }}!</h4>
+                                <p class="text-muted mb-0">Semua sistem berjalan dengan lancar.</p>
+                            </div>
+                        </div><!-- end card header -->
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
+            </div>
+        </div>
+    </div>
 
-        <div class="section-body">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Jumlah User</h5>
-                            <p class="card-text">{{ $data['user'] }} User</p>
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <!-- card -->
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Pengguna</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Jumlah User Aktif</h5>
-                            <p class="card-text">{{ $data['userActive'] }} User</p>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                        <div>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">20</h4>
+                            <a href="" class="text-decoration-underline">View Menu</a>
+                        </div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-success rounded fs-3">
+                                <i class="bx bx-user text-success"></i>
+                            </span>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Jumlah Produk</h5>
-                            <p class="card-text">{{ $data['product'] }} Produk</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Jumlah Produk Aktif</h5>
-                            <p class="card-text">{{ $data['productActive'] }} Produk</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 mt-5">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">Produk Terbaru</h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead class="bg-primary">
-                                    <tr>
-                                        <th class="text-white">Produk</th>
-                                        <th class="text-white">Tanggal Dibuat</th>
-                                        <th class="text-white">Harga (Rp)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($data['newProduct'] as $item)
-                                        <tr>
-                                            <td>
-                                                <img src="{{ $item->image }}" width="50">
-                                                <span>{{ $item->name }}</span>
-                                            </td>
-                                            <td>
-                                                {{ Carbon\Carbon::parse($item->created_at)->timezone('Asia/Jakarta')->locale('id_ID')->isoFormat('DD MMMM YYYY'); }}
-                                            </td>
-                                            <td>
-                                               Rp.{{ number_format($item->price, 0, ',', '.') }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
+                </div><!-- end card body -->
+            </div><!-- end card -->
+        </div><!-- end col -->
+    </div>
 @endsection
