@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
@@ -31,5 +32,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('content', ContentController::class);
 
     Route::resource('product', ProductController::class);
+    Route::resource('posts', PostController::class);
 
 });
