@@ -91,7 +91,26 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'menu_id'  => 'required|string',
+            'content' => 'required|string',
+            'url'   => 'required|string'
+        ]);
+
+        try {
+            $data   = $request->all();
+            $detail = Content::find($id);
+            $detail->update($data);
+
+            $notification = array(
+                'success'   => 'Berhasil update content',
+            );
+
+
+            return redirect()->route('admin.content.index')->with($notification);
+        } catch (\Throwable $e) {
+            return redirect()->route('admin.content.index')->with(['error' => 'Tambah data gagal! ' . $e->getMessage()]);
+        }
     }
 
     /**
