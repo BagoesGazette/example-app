@@ -14,3 +14,7 @@
 - php artisan migrate --seed
 - php artisan storage:link
 - php artisan serve
+
+## Account
+- username: admin@gmail.com
+- password: cobadiuji
