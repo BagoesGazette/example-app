@@ -66,7 +66,7 @@
                         <div class="card-footer">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button type="submit" class="btn btn-secondary bg-gradient wafes-effect waves-light"> Simpan Data</button>
-                                <a  href="{{ route('menu.index') }}" class="btn btn-light bg-gradient wafes-effect waves-light">Kembali</a>
+                                <a  href="{{ route('content.index') }}" class="btn btn-light bg-gradient wafes-effect waves-light">Kembali</a>
                             </div>
                         </div>
                     </form>
