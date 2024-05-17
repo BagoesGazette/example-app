@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>No.Telepon <span class="text-danger">*</span></label>
-                                    <input type="text" name="url" class="form-control  @error('phone') is-invalid @enderror" placeholder="Masukkan no telepon" value="{{ old('phone', $detail->phone) }}">
+                                    <input type="text" name="phone" class="form-control  @error('phone') is-invalid @enderror" placeholder="Masukkan no telepon" value="{{ old('phone', $detail->phone) }}">
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

@@ -52,11 +52,11 @@
                         <i class="ri-user-line"></i> User
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link {{ Request::is('posts*') ? ' active' : '' }}" href="{{ route('posts.index') }}">
                         <i class="ri-shuffle-line"></i> Post
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <!-- Sidebar -->

@@ -52,8 +52,8 @@
                     </div>
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
-                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">20</h4>
-                            <a href="" class="text-decoration-underline">View Menu</a>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{ $user }}</h4>
+                            <a href="{{ route('users.index') }}" class="text-decoration-underline">View Menu</a>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-soft-success rounded fs-3">

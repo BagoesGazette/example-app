@@ -39,6 +39,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Konten</th>
+                                    <th>Gambar</th>
                                     <th>Aksi</th>
                                 </thead>
                             </table>
@@ -72,6 +73,7 @@
                 {data: 'DT_RowIndex', name: 'id'},
                 {data: 'menu.name', name: 'menu.name'},
                 {data: 'content', name: 'content'},
+                {data: 'image', name: 'image'},
                 {data: 'action', name: 'action'},
             ],
         });
@@ -96,7 +98,7 @@
                         }
                     });
                     jQuery.ajax({
-                        url: "{{ route('menu.index') }}/"+id,
+                        url: "{{ route('content.index') }}/"+id,
                         data: {
                             id : id
                         },

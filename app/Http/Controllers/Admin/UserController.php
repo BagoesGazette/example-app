@@ -70,9 +70,9 @@ class UserController extends Controller
             );
 
 
-            return redirect()->back()->with($notification);
+            return redirect()->route('users.index')->with($notification);
         } catch (\Throwable $e) {
-            return redirect()->route('login')->with(['error' => 'Tambah data gagal! ' . $e->getMessage()]);
+            return redirect()->route('users.index')->with(['error' => 'Tambah data gagal! ' . $e->getMessage()]);
         }
     }
 
@@ -109,7 +109,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'email'     => "required|string|email|unique:users,email,{$id}",
+            'name'      => 'required|string',
+            'phone'     => 'required|string|max:15'
+        ]);
+
+        try {
+            $detail = User::find($id);
+            $detail->update($validated);
+
+            $notification = array(
+                'success'   => 'Berhasil update user dengan nama '.$request->input('name'),
+            );
+
+
+            return redirect()->route('users.index')->with($notification);
+        } catch (\Throwable $e) {
+            return redirect()->route('users.index')->with(['error' => 'Update data gagal! ' . $e->getMessage()]);
+        }
     }
 
     /**

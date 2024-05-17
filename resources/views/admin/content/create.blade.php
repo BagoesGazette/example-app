@@ -31,7 +31,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title text-right">Form Konten</h4>
                     </div>
-                    <form action="{{ route('content.store') }}" method="POST" autocomplete="off"> @csrf
+                    <form action="{{ route('content.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data"> @csrf
                         <div class="card-body">
                             <div class="row gy-3">
                                 <div class="form-group">
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="formFile" class="form-label">Gambar</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input class="form-control" type="file" name="image" id="formFile">
                                 </div>
                             </div>
                         </div>

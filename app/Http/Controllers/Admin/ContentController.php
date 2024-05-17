@@ -23,12 +23,22 @@ class ContentController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actions = [];
-                    $actions['edit'] = route('content.edit', $row->id);
                     $actions['destroy'] = $row->id;
                     
                     return view('admin.layouts.button', $actions);
                 })
-                ->rawColumns(['action'])
+                ->addColumn('image', function ($row) {
+                    if ($row->image) {
+                        // Ensure the image URL is properly wrapped in an HTML img tag
+                        return '<img src="' . $row->image . '" style="height:50px; width:50px;">';
+                    }
+                    return 'No image'; // Placeholder or message when no image is available
+                })
+                
+                ->addColumn('content', function ($row) {
+                    return $row->content;
+                })
+                ->rawColumns(['action', 'content', 'image'])
                 ->make(true);
         }
         return view('admin.content.index');
@@ -54,7 +64,32 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'menu_id'  => 'required',
+            'content'  => 'required|string',
+            'image'    => 'mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        try {
+            if (isset($validated['image'])) {
+
+                $validated['image']->storeAs('public/image', $validated['image']->hashName());
+            
+                $validated['image'] = $validated['image']->hashName();
+            }
+            
+
+            Content::create($validated);
+
+            $notification = array(
+                'success'   => 'Berhasil tambah konten',
+            );
+
+
+            return redirect()->route('content.index')->with($notification);
+        } catch (\Throwable $e) {
+            return redirect()->route('content.index')->with(['error' => 'Tambah data gagal! ' . $e->getMessage()]);
+        }
     }
 
     /**
@@ -121,6 +156,15 @@ class ContentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $detail =  Content::find($id);
+            if ($detail) {
+                $detail->delete();
+            }
+
+            return response()->json(['status' => 'success']);
+        } catch (\Throwable $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }

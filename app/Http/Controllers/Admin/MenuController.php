@@ -66,9 +66,9 @@ class MenuController extends Controller
             );
 
 
-            return redirect()->route('admin.menu.index')->with($notification);
+            return redirect()->route('menu.index')->with($notification);
         } catch (\Throwable $e) {
-            return redirect()->route('admin.menu.index')->with(['error' => 'Tambah data gagal! ' . $e->getMessage()]);
+            return redirect()->route('menu.index')->with(['error' => 'Tambah data gagal! ' . $e->getMessage()]);
         }
     }
 
@@ -121,9 +121,9 @@ class MenuController extends Controller
             );
 
 
-            return redirect()->route('admin.menu.index')->with($notification);
+            return redirect()->route('menu.index')->with($notification);
         } catch (\Throwable $e) {
-            return redirect()->route('admin.menu.index')->with(['error' => 'Tambah data gagal! ' . $e->getMessage()]);
+            return redirect()->route('menu.index')->with(['error' => 'Tambah data gagal! ' . $e->getMessage()]);
         }
     }
 
