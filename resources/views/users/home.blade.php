@@ -26,14 +26,6 @@
 
   <!-- Template Main CSS File -->
   <link href="vendors/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: FlexStart
-  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
-  * Updated: Mar 17 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -44,15 +36,14 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="vendors/img/logo.png" alt="">
-        <span>FlexStart</span>
+        <span>{{ config('app.name') }}</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#values">Profile</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          @foreach ($menu as $item)
+            <li><a class="nav-link scrollto" href="#{{ $item->route }}">{{ $item->name }}</a></li>
+          @endforeach
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -66,8 +57,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">We offer modern solutions for growing your business</h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">We are team of talented designers making websites with Bootstrap</h2>
+          <h1 data-aos="fade-up">Selamat Datang</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">{!! $home->content ?? '' !!}</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
               <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
@@ -78,7 +69,7 @@
           </div>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-          <img src="vendors/img/hero-img.png" class="img-fluid" alt="">
+          <img src="{{ $home->image ?? '' }}" class="img-fluid" alt="">
         </div>
       </div>
     </div>
@@ -94,10 +85,9 @@
 
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
-              <h3>Who We Are</h3>
-              <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
+              <h2>{{ $about->menu->name ?? '' }}.</h2>
               <p>
-                Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+                {!! $about->content ?? '' !!}
               </p>
               <div class="text-center text-lg-start">
                 <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
@@ -109,7 +99,7 @@
           </div>
 
           <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="vendors/img/about.jpg" class="img-fluid" alt="">
+            <img src="{{ $about->image ?? '' }}" class="img-fluid" alt="">
           </div>
 
         </div>
@@ -255,7 +245,7 @@
           <div class="col-lg-5 col-md-12 footer-info">
             <a href="index.html" class="logo d-flex align-items-center">
               <img src="vendors/img/logo.png" alt="">
-              <span>FlexStart</span>
+              <span>{{ config('app.name') }}</span>
             </a>
             <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
             <div class="social-links mt-3">
@@ -306,13 +296,9 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>{{ config('app.name') }}</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>

@@ -7,7 +7,7 @@
 
                     <a href="/" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="{{ asset('assets/images/logo-purwakarta.png') }}" alt="" height="22">
+                            <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                         </span>
                         <span class="logo-lg">
                             <h4 class="mt-4">{{ config('app.name') }}</h4>
@@ -16,7 +16,7 @@
                     <!-- Light Logo-->
                     <a href="/" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{ asset('assets/images/logo-purwakarta.png') }}" alt="" height="22">
+                            <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                         </span>
                         <span class="logo-lg">
                             <h4 class="mt-4">{{ config('app.name') }}</h4>

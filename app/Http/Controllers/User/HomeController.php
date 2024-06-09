@@ -3,15 +3,22 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Content;
+use App\Models\Menu;
 use App\Models\Product;
 use App\Models\User;
 
 class HomeController extends Controller
 {
     public function index(){
-        $product = Product::latest('id')->take(3)->get();
-
-        return view('users.home', compact('product'));
+        $menu = Menu::all();
+        $home = Content::whereHas('menu', function($q){
+            $q->where('name', 'Home');
+        })->first();
+        $about = Content::whereHas('menu', function($q){
+            $q->where('name', 'About');
+        })->first();
+        return view('users.home', compact('menu', 'home', 'about'));
     }
 
     public function dashboard(){

@@ -4,7 +4,7 @@
         <!-- Dark Logo-->
         <a href="/" class="logo logo-dark">
             <span class="logo-sm">
-                <img src="{{ asset('assets/images/logo-simental.svg') }}" alt="" height="50">
+                <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="50">
             </span>
             <span class="logo-lg">
                 <h4 class="mt-4">{{ config('app.name') }}</h4>
@@ -13,10 +13,10 @@
         <!-- Light Logo-->
         <a href="/" class="logo logo-light">
             <span class="logo-sm">
-                <img src="{{ asset('assets/images/logo-simental.svg') }}" alt="" height="50">
+                <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="50">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('assets/images/logo-simental.png') }}" alt="" height="50" class="me-2">
+                <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="50" class="me-2">
                 <span class="text-white" style="font-size: 1.5rem; line-height: 22px;">{{ config('app.name') }}</span>
             </span>
         </a>

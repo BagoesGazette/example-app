@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Content;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class ContentController extends Controller
@@ -159,6 +160,7 @@ class ContentController extends Controller
         try {
             $detail =  Content::find($id);
             if ($detail) {
+                Storage::disk('local')->delete('public/image/'.basename($detail->image));
                 $detail->delete();
             }
 

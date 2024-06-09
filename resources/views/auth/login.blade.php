@@ -6,7 +6,7 @@
     <title>Login | {{ config('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/logo-simental.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo-sm.png') }}">
 
     <!-- Layout config Js -->
     <scrip src="assets/js/layout.js"></script>
