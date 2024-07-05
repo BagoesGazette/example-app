@@ -197,7 +197,7 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="#" method="post" class="php-email-form">
+            <form action="{{ route('contact-us') }}" method="post"> @csrf
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -209,20 +209,10 @@
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
-                </div>
-
-                <div class="col-md-12">
                   <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
                 </div>
 
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
+                  <button type="submit" class="btn btn-primary">Send Message</button>
 
               </div>
             </form>
@@ -314,9 +304,25 @@
   <script src="vendors/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="vendors/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="vendors/vendor/php-email-form/validate.js"></script>
+  <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
 
   <!-- Template Main JS File -->
   <script src="vendors/js/main.js"></script>
+
+  @if(Session::has('success'))
+  <script>
+      Swal.fire({
+          html:'<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Sukses !</h4><p class="text-muted mx-4 mb-0">{{ Session::get("success") }}!</p></div></div>',
+          timer: 5000,
+          showCancelButton:!0,
+          showConfirmButton:!1,
+          cancelButtonClass:"btn btn-primary w-xs mb-1",
+          cancelButtonText:"Tutup",
+          buttonsStyling:!1,
+      })
+  </script>
+  @endif
 
 </body>
 

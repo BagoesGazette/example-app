@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PostController;
@@ -24,6 +25,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/contact-us', [ContactController::class, 'store'])->name('contact-us');
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('home');
@@ -33,5 +35,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::resource('product', ProductController::class);
     Route::resource('posts', PostController::class);
+    Route::resource('contact', ContactController::class);
 
 });

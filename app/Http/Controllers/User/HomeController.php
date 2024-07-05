@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactUs;
 use App\Models\Content;
 use App\Models\Menu;
 use App\Models\Product;
@@ -23,7 +24,8 @@ class HomeController extends Controller
 
     public function dashboard(){
         $user       = User::all()->count();
+        $contact    = ContactUs::all()->count();
 
-        return view('admin.dashboard.index', compact('user'));
+        return view('admin.dashboard.index', compact('user', 'contact'));
     }
 }

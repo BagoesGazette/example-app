@@ -66,7 +66,7 @@ class ContentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'menu_id'  => 'required',
+            'menu_id'  => 'required|unique:contents,menu_id',
             'content'  => 'required|string',
             'image'    => 'mimes:jpeg,png,jpg|max:2048'
         ]);

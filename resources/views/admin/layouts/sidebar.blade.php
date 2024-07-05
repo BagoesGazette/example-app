@@ -52,11 +52,11 @@
                         <i class="ri-user-line"></i> User
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link menu-link {{ Request::is('posts*') ? ' active' : '' }}" href="{{ route('posts.index') }}">
-                        <i class="ri-shuffle-line"></i> Post
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Request::is('contact*') ? ' active' : '' }}" href="{{ route('contact.index') }}">
+                        <i class="ri-shuffle-line"></i> Contact
                     </a>
-                </li> --}}
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
