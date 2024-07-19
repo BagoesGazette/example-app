@@ -44,6 +44,7 @@
           @foreach ($menu as $item)
             <li><a class="nav-link scrollto" href="#{{ $item->route }}">{{ $item->name }}</a></li>
           @endforeach
+          <li><a class="getstarted" href="{{ route('login') }}">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
