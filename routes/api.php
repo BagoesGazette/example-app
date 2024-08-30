@@ -17,4 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/encrypt', [PostController::class, 'encryptRequest']);
 Route::post('/decrypt', [PostController::class, 'decryptResponse']);
-
+Route::post('/encrypt-message', [PostController::class, 'encryptMessage']);
